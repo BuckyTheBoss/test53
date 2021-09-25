@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'bootstrap5',
-    'test54'
 ]
 
 MIDDLEWARE = [
@@ -113,6 +112,7 @@ LANGUAGES = [
     ('nl', _('Dutch')),
     ('he', _('Hebrew'))
 ]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
