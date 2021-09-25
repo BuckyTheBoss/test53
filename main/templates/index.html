@@ -1,10 +1,39 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
+    <h1>{% trans 'welcome_message' %}!</h1>
+    <h3>{% trans 'posts' %}:</h3>
+    <ul class="list-group">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <p>{% trans 'title' %}: {{post.title}}</p>
+                <p>{% trans 'content' %}: {{post.content}}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">{% trans 'post' %}</a>
+                <div class="accordion accordion" id="accordionFlushExample{{ post.id }}">
 
-    {% for post in posts %}
-        <p>{{post.title}}</p>
-    {% endfor %}
+                <h4>{% trans 'comments' %}</h4>
+                    <div class="accordion-item">
 
-<p>{{ comment.title }}</p>
+                        {% for comment in post.comment_set.all %}
+                            <h2 class="accordion-header" id="flush-heading{{forloop.counter}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{forloop.counter}}" aria-expanded="false" aria-controls="flush-collapse{{forloop.counter}}">
+                                    {{comment.title}}
+                                </button>
+                            </h2>
+                            <div id="flush-collapse{{forloop.counter}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{forloop.counter}}" data-bs-parent="#accordionFlushExample{{ post.id }}">
+                                <div class="accordion-body">{{ comment.content }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </li>
+{% trans 'hellodude' %}
+        {% endfor %}
+
+
+    </ul>
 {% endblock %}
+
+
+
