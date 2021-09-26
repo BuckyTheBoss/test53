@@ -12,6 +12,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'newpost' %}">{% trans 'new' %} {% trans 'post' %}</a>
                 </li>
+                {% if user.is_authenticated%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">{% trans 'logout' %}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">{% trans 'login' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">{% trans 'signup' %} </a>
+                </li>
+                {% endif %}
 
             </ul>
             <div class="nav-item dropdown ">
@@ -24,7 +36,7 @@
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ redirect_to }}" />
                                 <div class="input-group ">
-                                    <select class="form-select " name="language">
+                                    <select class="form-select " name="language" onchange="this.form.submit()">
                                         {% get_current_language as LANGUAGE_CODE %}
                                         {% get_available_languages as LANGUAGES %}
                                         {% for lang in LANGUAGES %}
@@ -33,7 +45,6 @@
                                             </option>
                                         {% endfor %}
                                     </select>
-                                    <button class="btn btn-success-secondary"><i class="bi bi-arrow-repeat"></i></button>
                                 </div>
                             </form>
                         </li>

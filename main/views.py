@@ -12,13 +12,12 @@ from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
     posts = Post.objects.all()
-    comment = Comment.objects.get(id=1)
-    return render(request, 'index.html', {'posts': posts, 'comment': comment})
+    return render(request, 'index.html', {'posts': posts})
 
 
 class CreatePostView(CreateView):
     model = Post
-    fields = '__all__' #['title', 'content']
+    fields = ['title', 'content']
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

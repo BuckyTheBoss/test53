@@ -8,7 +8,7 @@ from django.urls import reverse
 class Post(models.Model):
     title = models.CharField(_('title'), max_length=50)
     content = models.TextField(_('content'))
-    author = models.ForeignKey(User, verbose_name=_('author'), on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(User, verbose_name=_('author'), on_delete=models.CASCADE, null=True, blank=True)
     created_on = models.DateTimeField(verbose_name=_('created_on'), auto_now_add=True)
 
     class Meta:
